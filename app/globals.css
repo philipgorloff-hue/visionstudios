@@ -119,7 +119,100 @@ body {
   height: 1px;
   background: #C6FF00;
 }
-.lang-toggle { justify-self: end; }
+.nav-right {
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+.lang-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+/* ── HAMBURGER ──────────────────────────────────── */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 32px;
+  height: 32px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+.ham-line {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: #F0EBE0;
+  border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  transform-origin: center;
+}
+.ham-line.open:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.ham-line.open:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.ham-line.open:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+/* ── MOBILE FULLSCREEN MENU ─────────────────────── */
+.mob-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 700;
+  background: #050505;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 6rem clamp(1.5rem, 8vw, 4rem) 4rem;
+}
+.mob-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  flex: 1;
+  justify-content: center;
+}
+.mob-link {
+  font-family: var(--font-space), sans-serif;
+  font-size: clamp(2.8rem, 12vw, 5rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  color: rgba(240,235,224,0.35);
+  text-decoration: none;
+  line-height: 1.1;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: color 0.2s;
+  position: relative;
+}
+.mob-link:hover,
+.mob-link.active { color: #F0EBE0; }
+.mob-link.active { color: #C6FF00; }
+.mob-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #C6FF00;
+  flex-shrink: 0;
+}
+.mob-lang {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(240,235,224,0.07);
+}
+
+/* ── RESPONSIVE ─────────────────────────────────── */
+@media (max-width: 768px) {
+  .nav-links   { display: none; }
+  .hamburger   { display: flex; }
+  .lang-toggle { display: none; } /* shown inside mob-menu instead */
+}
 .nav-cta {
   font-family: var(--font-space), sans-serif;
   font-size: 0.8125rem;
