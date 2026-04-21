@@ -5,11 +5,13 @@ import { useEffect, useRef } from 'react';
 export default function Cursor() {
   const dotRef  = useRef(null);
   const ringRef = useRef(null);
+  const spotRef = useRef(null);
 
   useEffect(() => {
     const dot  = dotRef.current;
     const ring = ringRef.current;
-    if (!dot || !ring) return;
+    const spot = spotRef.current;
+    if (!dot || !ring || !spot) return;
 
     let mx = window.innerWidth  / 2;
     let my = window.innerHeight / 2;
@@ -19,8 +21,10 @@ export default function Cursor() {
     const onMove = (e) => {
       mx = e.clientX;
       my = e.clientY;
-      dot.style.left = mx + 'px';
-      dot.style.top  = my + 'px';
+      dot.style.left  = mx + 'px';
+      dot.style.top   = my + 'px';
+      spot.style.left = mx + 'px';
+      spot.style.top  = my + 'px';
     };
 
     const onDown = () => document.body.classList.add('cursor-down');
@@ -62,8 +66,9 @@ export default function Cursor() {
 
   return (
     <>
-      <div className="cursor-dot"  ref={dotRef}  />
-      <div className="cursor-ring" ref={ringRef} />
+      <div className="cursor-dot"       ref={dotRef}  />
+      <div className="cursor-ring"      ref={ringRef} />
+      <div className="cursor-spotlight" ref={spotRef} />
     </>
   );
 }
