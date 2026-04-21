@@ -184,8 +184,8 @@ export default function AboutScene() {
   }, []);
 
   return (
-    <div ref={wrapRef} style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
-      <canvas ref={canvasRef} style={{ display: 'block', width: '100%', height: '100%' }} />
+    <div ref={wrapRef} style={{ position: 'absolute', inset: 0, zIndex: 0, touchAction: 'pan-y' }}>
+      <canvas ref={canvasRef} style={{ display: 'block', width: '100%', height: '100%', touchAction: 'pan-y' }} />
     </div>
   );
 }
