@@ -78,10 +78,6 @@ function PlaneIcon() {
            C 261,91 267,87 267,80
            C 267,73 261,69 248,66 Z"/>
 
-      {/* ── FUSELAGE CENTERLINE ── */}
-      <path d="M 32,78 C 120,77 220,77 264,78"
-        stroke="rgba(255,255,255,0.14)" strokeWidth="1.5" strokeLinecap="round"/>
-
       {/* ── NOSE TIP ── */}
       <circle cx="297" cy="80" r="3"   fill="white" opacity="0.55"/>
       <circle cx="297" cy="80" r="1.4" fill="white" opacity="0.96"/>

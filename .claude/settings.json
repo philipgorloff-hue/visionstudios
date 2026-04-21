@@ -1,0 +1,16 @@
+{
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "netstat -ano 2>/dev/null | grep -q '127.0.0.1:3000\\|0.0.0.0:3000' || (cd \"c:/Users/Prêt/Desktop/VS Code/visionstudios\" && npm run dev &)",
+            "async": true,
+            "statusMessage": "Dev server starten..."
+          }
+        ]
+      }
+    ]
+  }
+}
