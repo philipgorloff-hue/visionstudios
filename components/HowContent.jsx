@@ -258,19 +258,6 @@ export default function HowContent() {
             </div>
           )}
 
-          {/* Badge — "At every step, free to walk away" */}
-          {activeStep === 3 && (
-            <div style={{
-              position: 'absolute', top: '50%', right: 'clamp(1.5rem,4vw,3rem)',
-              transform: 'translateY(-50%)',
-              zIndex: 15,
-              fontFamily: 'var(--font-space), sans-serif',
-              fontSize: '0.7rem', fontWeight: 700,
-              letterSpacing: '0.1em', textTransform: 'uppercase',
-              color: '#050505', background: '#C6FF00',
-              padding: '0.6rem 1.2rem', borderRadius: '100px',
-            }}>{hw.badge}</div>
-          )}
         </div>
       </div>
 
