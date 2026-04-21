@@ -90,15 +90,17 @@ function Rope({ ropeRef }) {
   return (
     <svg
       ref={ropeRef}
-      style={{ position:'absolute', inset:0, width:'100%', height:'100%', pointerEvents:'none', zIndex:11, opacity:0 }}
+      style={{ position:'fixed', inset:0, width:'100%', height:'100%', pointerEvents:'none', zIndex:11, opacity:0 }}
     >
       <defs>
         <linearGradient id="ropeGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%"   stopColor="#C6FF00" stopOpacity="0.9"/>
-          <stop offset="100%" stopColor="#C6FF00" stopOpacity="0.1"/>
+          <stop offset="0%"   stopColor="#C6FF00" stopOpacity="0.95"/>
+          <stop offset="100%" stopColor="#C6FF00" stopOpacity="0.25"/>
         </linearGradient>
       </defs>
-      <line id="rope-line" stroke="url(#ropeGrad)" strokeWidth="2.5" strokeDasharray="10 7"/>
+      <line id="rope-line" stroke="url(#ropeGrad)" strokeWidth="2" strokeDasharray="8 6"
+        style={{ animation: 'dashScroll 0.6s linear infinite' }}/>
+      <style>{`@keyframes dashScroll { to { stroke-dashoffset: -28; } }`}</style>
     </svg>
   );
 }
@@ -181,13 +183,26 @@ export default function HeroScene() {
         onUpdate(self) {
           const rope = ropeRef.current;
           if (!rope || !planeRef.current || !nextRef.current) return;
+          const p = self.progress;
+
+          // Opacity: sync directly with progress — no scrub lag
+          let opacity = 0;
+          if      (p >= 0.57 && p < 0.60) opacity = (p - 0.57) / 0.03;
+          else if (p >= 0.60 && p < 0.70) opacity = 1;
+          else if (p >= 0.70 && p < 0.75) opacity = 1 - (p - 0.70) / 0.05;
+          rope.style.opacity = opacity;
+
+          if (opacity === 0) return;
+
           const pR = planeRef.current.getBoundingClientRect();
           const nR = nextRef.current.getBoundingClientRect();
           const line = rope.querySelector('#rope-line');
           if (!line) return;
-          line.setAttribute('x1', pR.left + pR.width  / 2);
-          line.setAttribute('y1', pR.top  + pR.height);
-          line.setAttribute('x2', nR.left + nR.width  / 2);
+
+          const x = pR.left + pR.width / 2;
+          line.setAttribute('x1', x);
+          line.setAttribute('y1', pR.bottom);
+          line.setAttribute('x2', x);
           line.setAttribute('y2', nR.top);
         },
       }
@@ -239,10 +254,8 @@ export default function HeroScene() {
       duration: 0.45, ease: 'power2.out',
     }, 0.55);
 
-    // — Rope + next section rise with the plane
-    tl.to(ropeRef.current,  { opacity: 1, duration: 0.04 }, 0.57);
+    // — Next section rises with the plane (rope opacity handled in onUpdate)
     tl.to(nextRef.current,  { y: 0, duration: 0.40, ease: 'power2.out' }, 0.60);
-    tl.to(ropeRef.current,  { opacity: 0, duration: 0.06 }, 0.72);
     tl.to(planeRef.current, { opacity: 0, duration: 0.06 }, 0.74);
 
     return () => {
