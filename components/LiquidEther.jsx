@@ -538,7 +538,7 @@ void main(){ vec2 old=texture2D(velocity,uv).xy; vec2 n0=texture2D(velocity_new,
         overflow: 'hidden',
         width: '100%',
         height: '100%',
-        touchAction: 'none',
+        touchAction: 'pan-y',
         ...style,
       }}
     />
