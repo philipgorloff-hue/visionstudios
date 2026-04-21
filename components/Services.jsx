@@ -16,22 +16,26 @@ export default function Services() {
   const { label, title, cta, items } = t.services;
 
   useEffect(() => {
-    // Header
-    gsap.fromTo(headRef.current,
+    const triggers = [];
+
+    const t0 = gsap.fromTo(headRef.current,
       { opacity: 0, y: 24 },
       { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out',
         scrollTrigger: { trigger: headRef.current, start: 'top 88%' } }
     );
+    triggers.push(t0.scrollTrigger);
 
-    // Rows stagger in
     rowRefs.current.filter(Boolean).forEach((row, i) => {
-      gsap.fromTo(row,
+      const tw = gsap.fromTo(row,
         { opacity: 0, y: 30 },
         { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out',
           delay: i * 0.07,
           scrollTrigger: { trigger: row, start: 'top 90%' } }
       );
+      triggers.push(tw.scrollTrigger);
     });
+
+    return () => triggers.forEach(st => st?.kill());
   }, []);
 
   return (

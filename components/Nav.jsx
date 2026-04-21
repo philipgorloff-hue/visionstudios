@@ -22,11 +22,12 @@ export default function Nav() {
     if (!nav) return;
     gsap.set(nav, { opacity: 0, y: -20 });
     gsap.to(nav, { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out', delay: 0.4 });
-    ScrollTrigger.create({
+    const st = ScrollTrigger.create({
       start: 80,
       onEnter:     () => nav.classList.add('scrolled'),
       onLeaveBack: () => nav.classList.remove('scrolled'),
     });
+    return () => st.kill();
   }, []);
 
   // Animate mobile menu open/close

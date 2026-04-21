@@ -18,9 +18,11 @@ export default function Contact() {
     const section = sectionRef.current;
     if (!section) return;
 
+    const triggers = [];
+
     const wordEls = headRef.current?.querySelectorAll('.hw');
     if (wordEls) {
-      gsap.fromTo(
+      const tw = gsap.fromTo(
         [...wordEls],
         { yPercent: 110 },
         {
@@ -31,9 +33,10 @@ export default function Contact() {
           scrollTrigger: { trigger: section, start: 'top 75%' },
         }
       );
+      triggers.push(tw.scrollTrigger);
     }
 
-    gsap.fromTo(subRef.current,
+    const tw2 = gsap.fromTo(subRef.current,
       { opacity: 0, y: 20 },
       {
         opacity: 1, y: 0, duration: 0.8, ease: 'power3.out',
@@ -41,6 +44,9 @@ export default function Contact() {
         delay: 0.3,
       }
     );
+    triggers.push(tw2.scrollTrigger);
+
+    return () => triggers.forEach(st => st?.kill());
   }, [words]);
 
   return (

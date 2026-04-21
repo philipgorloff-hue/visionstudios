@@ -48,31 +48,38 @@ export default function AboutContent() {
 
   // ── Scroll reveals
   useEffect(() => {
+    const triggers = [];
+
     const founders = founderRefs.current.filter(Boolean);
     founders.forEach((el, i) => {
-      gsap.fromTo(el,
+      const tw = gsap.fromTo(el,
         { opacity: 0, y: 40 },
         { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out',
           scrollTrigger: { trigger: el, start: 'top 85%' }, delay: i * 0.12 }
       );
+      triggers.push(tw.scrollTrigger);
     });
 
     const values = valueRefs.current.filter(Boolean);
     values.forEach((el, i) => {
-      gsap.fromTo(el,
+      const tw = gsap.fromTo(el,
         { opacity: 0, y: 30 },
         { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out',
           scrollTrigger: { trigger: el, start: 'top 88%' }, delay: i * 0.1 }
       );
+      triggers.push(tw.scrollTrigger);
     });
 
     if (pitchRef.current) {
-      gsap.fromTo(pitchRef.current,
+      const tw = gsap.fromTo(pitchRef.current,
         { opacity: 0, y: 30 },
         { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out',
           scrollTrigger: { trigger: pitchRef.current, start: 'top 80%' } }
       );
+      triggers.push(tw.scrollTrigger);
     }
+
+    return () => triggers.forEach(st => st?.kill());
   }, []);
 
   const sectionPad = 'clamp(80px,10vw,130px) clamp(1.5rem,5vw,4rem)';
