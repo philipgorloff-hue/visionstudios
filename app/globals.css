@@ -209,9 +209,10 @@ body {
 
 /* ── RESPONSIVE ─────────────────────────────────── */
 @media (max-width: 768px) {
+  .nav-inner   { display: flex; justify-content: space-between; }
   .nav-links   { display: none; }
   .hamburger   { display: flex; }
-  .lang-toggle { display: none; } /* shown inside mob-menu instead */
+  .lang-toggle { display: none; }
 }
 .nav-cta {
   font-family: var(--font-space), sans-serif;
