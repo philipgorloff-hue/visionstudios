@@ -100,15 +100,6 @@ export default function ContactClient() {
         ctx.fill();
       });
 
-      // Scan line
-      const sy = ((time * 45) % (H + 60)) - 30;
-      const sg = ctx.createLinearGradient(0, sy - 2, 0, sy + 2);
-      sg.addColorStop(0,   'transparent');
-      sg.addColorStop(0.5, `rgba(198,255,0,${0.07 + prog * 0.13})`);
-      sg.addColorStop(1,   'transparent');
-      ctx.fillStyle = sg;
-      ctx.fillRect(0, sy - 2, W, 4);
-
       time += 0.016;
     }
 
