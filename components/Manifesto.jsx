@@ -22,7 +22,7 @@ export default function Manifesto() {
 
     els.forEach((line, i) => {
       const inner = line.querySelector('.clip-inner');
-      gsap.fromTo(inner,
+      const tw = gsap.fromTo(inner,
         { yPercent: 105 },
         {
           yPercent: 0,
@@ -36,11 +36,12 @@ export default function Manifesto() {
           },
         }
       );
+      if (tw.scrollTrigger) triggers.push(tw.scrollTrigger);
     });
 
     const dimEls = els.filter((_, i) => lines[i]?.dim);
     dimEls.forEach(line => {
-      gsap.fromTo(line,
+      const tw = gsap.fromTo(line,
         { color: 'rgba(240,235,224,0.12)' },
         {
           color: '#F0EBE0',
@@ -53,9 +54,10 @@ export default function Manifesto() {
           },
         }
       );
+      if (tw.scrollTrigger) triggers.push(tw.scrollTrigger);
     });
 
-    return () => ScrollTrigger.getAll().forEach(t => t.kill());
+    return () => triggers.forEach(t => t.kill());
   }, [lines]);
 
   return (

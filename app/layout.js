@@ -1,6 +1,9 @@
 import { Space_Grotesk, Inter } from 'next/font/google';
 import { LangProvider } from '@/lib/LangContext';
+import { TransitionProvider } from '@/lib/TransitionContext';
 import Nav from '@/components/Nav';
+import Cursor from '@/components/Cursor';
+import Preloader from '@/components/Preloader';
 import './globals.css';
 
 const spaceGrotesk = Space_Grotesk({
@@ -46,7 +49,16 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${spaceGrotesk.variable} ${inter.variable}`}>
-      <body><LangProvider><Nav />{children}</LangProvider></body>
+      <body>
+        <LangProvider>
+          <TransitionProvider>
+            <Preloader />
+            <Cursor />
+            <Nav />
+            {children}
+          </TransitionProvider>
+        </LangProvider>
+      </body>
     </html>
   );
 }

@@ -351,7 +351,7 @@ export default function HeroScene() {
             letterSpacing: '0.22em', textTransform: 'uppercase',
             color: '#C6FF00', marginBottom: 'clamp(1.2rem, 2.5vw, 2rem)',
           }}>
-            Motion · 3D · Interactive
+            {t.hero?.categories || 'Motion · 3D · Interactive'}
           </div>
           <div style={{
             fontFamily: 'var(--font-space), sans-serif',
@@ -359,9 +359,9 @@ export default function HeroScene() {
             fontWeight: 700, lineHeight: 0.9, letterSpacing: '-0.045em',
             color: '#F0EBE0', marginBottom: 'clamp(1.5rem, 3vw, 2.8rem)',
           }}>
-            We build what<br/>
-            <span style={{ color: '#C6FF00' }}>others only</span><br/>
-            imagine.
+            {t.hero?.tagline1 || 'We build what'}<br/>
+            <span style={{ color: '#C6FF00' }}>{t.hero?.tagline2 || 'others only'}</span><br/>
+            {t.hero?.tagline3 || 'imagine.'}
           </div>
           <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap', alignItems: 'center' }}>
             <Link href="/contact" style={{

@@ -268,7 +268,7 @@ export default function ContactClient() {
             color: '#F0EBE0', textAlign: 'center',
             marginBottom: 'clamp(2.5rem,5vw,4rem)',
             pointerEvents: 'none',
-          }}>MAKE CONTACT.</div>
+          }}>{t.contactSection?.makeContact || 'MAKE CONTACT.'}</div>
 
           {/* Button + ring */}
           <div style={{ position: 'relative', width: 160, height: 160, flexShrink: 0 }}>

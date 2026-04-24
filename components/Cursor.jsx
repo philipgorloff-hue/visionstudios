@@ -13,6 +13,13 @@ export default function Cursor() {
     const spot = spotRef.current;
     if (!dot || !ring || !spot) return;
 
+    if ('ontouchstart' in window) {
+      dot.style.display  = 'none';
+      ring.style.display = 'none';
+      spot.style.display = 'none';
+      return;
+    }
+
     let mx = window.innerWidth  / 2;
     let my = window.innerHeight / 2;
     let rx = mx, ry = my;

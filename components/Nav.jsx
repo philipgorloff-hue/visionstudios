@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useLang, useT } from '@/lib/LangContext';
+import TransitionLink from '@/components/TransitionLink';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -30,7 +31,6 @@ export default function Nav() {
     return () => st.kill();
   }, []);
 
-  // Animate mobile menu open/close
   useEffect(() => {
     const el = menuRef.current;
     if (!el) return;
@@ -50,7 +50,6 @@ export default function Nav() {
     }
   }, [open]);
 
-  // Close menu on route change
   useEffect(() => { setOpen(false); }, [pathname]);
 
   const links = [
@@ -63,22 +62,20 @@ export default function Nav() {
     <>
       <nav className="nav" ref={navRef}>
         <div className="nav-inner">
-          <Link href="/" className="nav-logo">
+          <TransitionLink href="/" className="nav-logo">
             VISION<span>.</span>STUDIOS
-          </Link>
+          </TransitionLink>
 
-          {/* Desktop links */}
           <ul className="nav-links">
             {links.map(({ href, label }) => (
               <li key={href}>
-                <Link href={href} className={pathname === href ? 'nav-link active' : 'nav-link'}>
+                <TransitionLink href={href} className={pathname === href ? 'nav-link active' : 'nav-link'}>
                   {label}
-                </Link>
+                </TransitionLink>
               </li>
             ))}
           </ul>
 
-          {/* Desktop lang + hamburger */}
           <div className="nav-right">
             <div className="lang-toggle">
               <button className={`lang-btn${lang === 'en' ? ' active' : ''}`} onClick={() => setLang('en')}>EN</button>
@@ -99,7 +96,6 @@ export default function Nav() {
         </div>
       </nav>
 
-      {/* Mobile fullscreen menu */}
       {open && (
         <div className="mob-menu" ref={menuRef}>
           <nav className="mob-links">

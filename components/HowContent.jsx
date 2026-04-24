@@ -282,7 +282,7 @@ export default function HowContent() {
           fontWeight: 700, letterSpacing: '-0.045em',
           lineHeight: 0.9, color: '#F0EBE0',
         }}>
-          Start today<span style={{ color: '#C6FF00' }}>.</span>
+          {t.about?.cta?.startToday || 'Start today'}<span style={{ color: '#C6FF00' }}>.</span>
         </div>
 
         <Link href="/contact" style={{
